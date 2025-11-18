@@ -5,7 +5,7 @@ from . import db
 from .models import User
 from .auth import set_password, verify_password
 
-api = Blueprint('api', __name__)
+api = Blueprint('api', __name__, url_prefix='/')
 
 @api.route('/register', methods=['POST'])
 def register():
@@ -29,10 +29,10 @@ def login():
     user = User.query.filter_by(username=data.get('username')).first()
 
     if user and verify_password(user.password, data.get('password')):
-        acess_token = create_access_token(identity={"id": user.id, "role": user.role})
+        access_token = create_access_token(identity={"id": user.id, "role": user.role})
         refresh_token = create_refresh_token(identity={"id": user.id, "role": user.role})
         
-        return jsonify(acess_token=acess_token, refresh_token=refresh_token)
+        return jsonify(access_token=access_token, refresh_token=refresh_token)
     
     return jsonify({"msg": "Bad credentials"}), 401
 
