@@ -16,12 +16,11 @@ def create_app():
 
     default_db = "sqlite:///tmp/app.db"
 
-    app.config.from_mapping(
-        SECRET_KEY=os.getenv("SECRET_KEY", "dev-secret"),
-        SQLALCHEMY_DATABASE_URI=os.getenv("DATABASE_URL", default_db),
-        JWT_SECRET_KEY=os.getenv("JWT_SECRET_KEY", "jwt-super-secret"),
-        SQLALCHEMY_TRACK_MODIFICATIONS=False
-    )
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-secret')
+    app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'jwt-super-secret')
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///:memory:')
 
     db.init_app(app)
     migrate.init_app(app, db)
