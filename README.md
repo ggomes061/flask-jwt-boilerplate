@@ -11,7 +11,7 @@ Production-ready backend template with everything you need to start a new projec
 - Rate limiting & CORS configured
 
 ### Live Demo
-https://flask-jwt-boilerplate.onrender.com (ou seu link)
+https://flask-jwt-boilerplate.onrender.com
 
 ### Endpoints
 | Route         | Method | Auth     | Description            |
